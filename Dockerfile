@@ -50,13 +50,13 @@ ENV HOP_OPTIONS=-XX:+AggressiveHeap
 # INSTALL REQUIRED PACKAGES AND ADJUST LOCALE
 # procps: The package includes the programs ps, top, vmstat, w, kill, free, slabtop, and skill
 
-RUN apk update \
-RUN apk add --no-cache bash curl procps \ 
-RUN rm -rf /var/cache/apk/* \
-RUN mkdir ${DEPLOYMENT_PATH} \
-RUN mkdir ${VOLUME_MOUNT_POINT} \
-RUN adduser -D -s /bin/bash -h /home/hop hop \
-RUN chown hop:hop ${DEPLOYMENT_PATH} \
+RUN apk update
+RUN apk add --no-cache bash curl procps
+RUN rm -rf /var/cache/apk/*
+RUN mkdir ${DEPLOYMENT_PATH}
+RUN mkdir ${VOLUME_MOUNT_POINT}
+RUN adduser -D -s /bin/bash -h /home/hop hop
+RUN chown hop:hop ${DEPLOYMENT_PATH}
 RUN chown hop:hop ${VOLUME_MOUNT_POINT}
 #  && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
 #  && locale-gen \
@@ -69,9 +69,9 @@ COPY --chown=hop:hop ./resources/load-and-execute.sh ${DEPLOYMENT_PATH}/load-and
 
 
 # Fetch the specified hop version 
-RUN ${DEPLOYMENT_PATH}/get-hop.sh \
-  && chown -R hop:hop ${DEPLOYMENT_PATH}/hop \
-  && chmod 700 ${DEPLOYMENT_PATH}/hop/*.sh
+RUN ${DEPLOYMENT_PATH}/get-hop.sh
+RUN chown -R hop:hop ${DEPLOYMENT_PATH}/hop
+RUN chmod 700 ${DEPLOYMENT_PATH}/hop/*.sh
 
 EXPOSE 8080
 
