@@ -1,4 +1,5 @@
-FROM openjdk:8-alpine
+#FROM openjdk:8-alpine
+FROM openjdk:oraclelinux8
 MAINTAINER Project Hop Team
 # Argument Branch name, used to download correct version
 ARG BRANCH_NAME
@@ -50,13 +51,13 @@ ENV HOP_OPTIONS=-XX:+AggressiveHeap
 # procps: The package includes the programs ps, top, vmstat, w, kill, free, slabtop, and skill
 
 RUN apk update \
-  && apk add --no-cache bash curl procps \ 
-  && rm -rf /var/cache/apk/* \
-  && mkdir ${DEPLOYMENT_PATH} \
-  && mkdir ${VOLUME_MOUNT_POINT} \
-  && adduser -D -s /bin/bash -h /home/hop hop \
-  && chown hop:hop ${DEPLOYMENT_PATH} \
-  && chown hop:hop ${VOLUME_MOUNT_POINT}
+RUN apk add --no-cache bash curl procps \ 
+RUN rm -rf /var/cache/apk/* \
+RUN mkdir ${DEPLOYMENT_PATH} \
+RUN mkdir ${VOLUME_MOUNT_POINT} \
+RUN adduser -D -s /bin/bash -h /home/hop hop \
+RUN chown hop:hop ${DEPLOYMENT_PATH} \
+RUN chown hop:hop ${VOLUME_MOUNT_POINT}
 #  && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
 #  && locale-gen \
 #  && update-locale LANG=${LANG} LC_ALL={LC_ALL}
